@@ -19,16 +19,35 @@ import org.springframework.transaction.annotation.Transactional;
 public class CategoriaService {
 
     @Autowired
-    private CategoriaRepository categoriaRepository;
+    private CategoriaRepository categoriaRepository;// CRUD R=READ C=CREATE U=UPDATE D=DELETE C-> CREATE(INGRESAR A LA BD Y VOY CREAR NUEVAS CATEGORIAS
     
     @Transactional(readOnly = true)
-    public List<Categoria> getCategorias(boolean activo) {
+    public List<Categoria> getCategorias(boolean activo) { //READ -> Ingresar a labd pueda leer toda la infromación de la categoria
         var lista = categoriaRepository.findAll();
         if (activo) {
             lista.removeIf(e -> !e.getActivo());
         }
         return lista;
     }
-
+    
+    @Transactional
+    public void save(Categoria categoria) {
+        categoriaRepository.save(categoria);
+    }   
+        @Transactional 
+    public boolean delete(Categoria categoria){ 
+        try{
+            categoriaRepository.delete(categoria);
+            categoriaRepository.flush(); 
+            return true;
+        } catch (Exception e){ 
+            return false;
+        }
+    }
+    
+        @Transactional(readOnly = true)
+    public Categoria getCategoria(Categoria categoria){ 
+        return categoriaRepository.findById(categoria.getIdCategoria()).orElse(null);
+    }
+    
 }
-
