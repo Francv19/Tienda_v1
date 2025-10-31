@@ -9,32 +9,47 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import java.io.Serializable;
-import java.util.List;
+import java.math.BigDecimal;
 import lombok.Data;
 
 @Data
 @Entity
-@Table(name="categoria")
-public class Categoria implements Serializable{
+@Table(name="producto")
+public class Producto implements Serializable{
     private static final long serialVersionUID = 1L; 
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_categoria")    
-    private Integer idCategoria; 
+    @Column(name = "id_producto")    
+    private Integer idProducto; 
     
-    @Column(unique = true, nullable = false, length = 30 )
+    @Column(unique = true, nullable = false, length = 50 )
+    //@NotBlank(message ="La descripción no puede estar vacia");
     private String descripcion; 
     
+    @Column(columnDefinition = "TEXT")
+    private String detalle;
+    
+    @Column(precision = 12, scale = 2)
+    private BigDecimal precio;
+    
+    //@NotBlank(message ="El campo de existencias no puede estar");
+    private Integer existencias; //(Este campos funciona para calculos con el inventario)//
+            
+            
     @Column(length = 1024)
     private String rutaImagen; 
     
     @Column(name = "activo")
     private Boolean activo; 
     
-    @OneToMany(mappedBy = "categoria")
-    private List<Producto> productos;
+    
+    @ManyToOne
+    @JoinColumn (name = "id categoria")
+    private Categoria categoria;
+    
 }
