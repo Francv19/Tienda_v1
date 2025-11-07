@@ -2,21 +2,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
-    <head th:replace="~{general/plantilla :: head}"/>
+    <head th:replace="~{general/fragmentos :: head}"/>
 
     <body>
         <!-- fragmento 1 para Agregar producto en ventana modal -->
-        <section th:fragment="agregar">
-            <!-- Button trigger modal -->
-            <div class='row py-4 mb-2 bg-light'>
-                <div class='col-md-1'></div>
-                <div class='col-md-3'>
-                    <button type="button" class="btn btn-primary"
+        <section th:fragment="botonesAgregar" class="py-4 mb-4 bg-light">
+            <div class="container">
+                <div class="row"></div>
+                <div class="col-md-3">
+                    <button type="button" class="btn btn-primary btn-block"
                             data-bs-toggle="modal" data-bs-target="#agregarProductoModal">
-                        <i class="fa-solid fa-plus"></i> [[#{producto.agregar}]]</button>
+                        <i class="fas-fa-plus"></i> [[#{producto.agregar}]]
+                    </button>
                 </div>
             </div>
-            <!-- Modal -->
+            <!-- fragmento para agregar producto es la ventana Modal -->
             <div class="modal fade" id="agregarProductoModal"  tabindex="-1" 
                  aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
