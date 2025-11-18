@@ -49,7 +49,7 @@ public class Producto implements Serializable{
     
     
     @ManyToOne
-    @JoinColumn (name = "id categoria")
+    @JoinColumn (name = "id_categoria")
     private Categoria categoria;
     
 }

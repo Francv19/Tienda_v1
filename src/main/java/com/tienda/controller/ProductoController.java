@@ -88,4 +88,19 @@ public class ProductoController {
 
         return "redirect:/producto/listado";
     }
+    
+    @PostMapping("/queryProduct")
+    public String queryProduct(@RequestParam("precioInf") double precioInf,
+            @RequestParam("precioSup") double precioSup,
+            Model model) {
+
+        var productos = productoService.findByPrecioBetweenAndActivoOrderByDescripcion(precioInf, precioSup);
+        model.addAttribute("productos", productos);
+        model.addAttribute("precioInf", precioInf);
+        model.addAttribute("precioSup", precioSup);
+        model.addAttribute("totalProductos", productos.size());
+
+        return "/producto/listado";
+    }
+
 }

@@ -25,6 +25,9 @@ public interface ProductoRepository extends JpaRepository<Producto, Integer>{
     //Ejemplo de método utilizando Consultas con JPQL
     @Query(value="SELECT a FROM Producto a where a.precio BETWEEN :precioInf AND :precioSup ORDER BY a.descripcion ASC")
     public List<Producto> metodoJPQL(@Param("precioInf") double precioInf, @Param("precioSup") double precioSup);
-    
-}
 
+    
+    
+    List<Producto> findByPrecioBetweenAndActivoOrderByDescripcion(double precioInf, double precioSup, boolean activo);
+
+}
